@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class CustomerService {
     private static CustomerService customerServiceInstance;
-    private static List<Customer> customers = new ArrayList<>();;
+    private static List<Customer> customers = new ArrayList<>();
     private CustomerService(){}
 
     static {

@@ -8,7 +8,7 @@ import java.util.*;
 
 import static java.lang.System.in;
 
-public class Main {
+public class HotelApplication {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(in);
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
@@ -18,31 +18,46 @@ public class Main {
             boolean isAppOpen = true;
             boolean displayMainMenu = true;
             String line;
-            while (isAppOpen){
+            while (isAppOpen) {
                 line = displayMainMenu ? MainMenu.display() : AdminMenu.display();
-                if (!displayMainMenu){
-                    switch (line){
+                if (!displayMainMenu) {
+                    int roomNumber = 0;
+                    Double roomPrice = 0.0;
+                    int rmType=1;
+                    switch (line) {
                         case "6":
                             displayMainMenu = true;
                             break;
                         case "4":
                             System.out.println("Enter room number");
-                            String roomNumber = scanner.nextLine();
+                            if (scanner.hasNextInt()) {
+                                roomNumber = scanner.nextInt();
+                            }else{
+                                throw new IllegalArgumentException("Invalid room number");
+                            }
                             System.out.println("Enter price per night");
-                            String roomPrice = scanner.nextLine();
+                            if (scanner.hasNextDouble()) {
+                                roomPrice = scanner.nextDouble();
+                            }else{
+                                throw new IllegalArgumentException("Invalid room price");
+                            }
                             System.out.println("Enter room type: 1 for single bed, 2 for double bed");
-                            String rmType = scanner.nextLine();
-                            AdminResource.addRoom(new Room(roomNumber,Double.parseDouble(roomPrice), rmType == "1" ? RoomType.SINGLE :  RoomType.DOUBLE));
-                            System.out.println(ReservationService.getARoom(roomNumber));
+                            if (scanner.hasNextInt() && (scanner.nextLine().equals(1) || scanner.nextLine().equals(2))) {
+                                rmType = scanner.nextInt();
+                            }else{
+                                throw new IllegalArgumentException("Invalid room type");
+                            }
+                            AdminResource.addRoom(new Room(String.valueOf(roomNumber), roomPrice, rmType == 1 ? RoomType.SINGLE : RoomType.DOUBLE));
+                            System.out.println(ReservationService.getARoom(String.valueOf((roomNumber))));
                             break;
                         case "1":
                             Collection<Customer> customers = AdminResource.getAllCustomers();
                             System.out.println(customers);
                             break;
                         case "2":
-                          Collection<IRoom> rooms = AdminResource.getAllRooms();
-                          System.out.println(rooms);
-                          break;
+                            Collection<IRoom> rooms = AdminResource.getAllRooms();
+                            System.out.println(rooms);
+                            break;
                         case "3":
                             AdminResource.displayAllReservations();
                             break;
@@ -78,7 +93,7 @@ public class Main {
                             String firstName = scanner.nextLine();
                             System.out.println("Enter your last Name");
                             String lastName = scanner.nextLine();
-                            HotelResource.createACustomer(emailId,firstName,lastName);
+                            HotelResource.createACustomer(emailId, firstName, lastName);
                             System.out.println("Account is created. Proceed with reserving a room");
                             break;
                         case "2":
@@ -95,9 +110,9 @@ public class Main {
                     }
                 }
             }
-        }catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex.getLocalizedMessage());
-        }finally {
+        } finally {
             scanner.close();
         }
     }

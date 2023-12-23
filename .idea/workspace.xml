@@ -4,28 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3ec631c7-af62-402f-b4c7-049b5888488c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HotelReservation.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/api/AdminResource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/api/HotelResource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/AdminMenu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/FreeRoom.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/MainMenu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/Reservation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/Room.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/RoomType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/customer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/service/CustomerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/service/ReservationService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/Tester.java" afterDir="false" />
+    <list default="true" id="3ec631c7-af62-402f-b4c7-049b5888488c" name="Changes" comment="first commiy">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HotelApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Room.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/CustomerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/CustomerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/ReservationService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,12 +47,13 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "last_opened_file_path": "/Users/poonamgupta/Documents/udacity-java/HotelReservation"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.Main">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
+  <component name="RunManager" selected="Application.HotelApplication">
+    <configuration name="HotelApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="HotelApplication" />
       <module name="HotelReservation" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -88,7 +74,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.HotelApplication" />
         <item itemvalue="Application.Tester" />
       </list>
     </recent_temporary>
@@ -102,6 +88,14 @@
       <option name="presentableId" value="Default" />
       <updated>1702355329998</updated>
     </task>
+    <task id="LOCAL-00001" summary="first commiy">
+      <created>1703053331966</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1703053331966</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -114,5 +108,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="first commiy" />
+    <option name="LAST_COMMIT_MESSAGE" value="first commiy" />
   </component>
 </project>

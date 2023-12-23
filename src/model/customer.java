@@ -30,8 +30,8 @@ public class Customer {
     private String firstName;
     private String lastName;
     private String email;
-    private final String emailRegex = "^(.+)@(.+).(.+)$";
-    private final Pattern pattern = Pattern.compile(emailRegex);
+    private final String emailRegex = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
+    private final Pattern pattern = Pattern.compile(emailRegex,Pattern.CASE_INSENSITIVE);
 
     public Customer(String firstName, String lastName, String email) {
         if(!pattern.matcher(email).matches()){

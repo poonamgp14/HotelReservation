@@ -6,14 +6,13 @@ import model.Reservation;
 
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ReservationService {
-    private static List<IRoom> rooms = new ArrayList<>();
-    private static List<Reservation> reservations = new ArrayList<>();;
+    private static Set<IRoom> rooms = new HashSet<>();
+    private static Set<Reservation> reservations = new HashSet<>();;
     private static ReservationService reservationServiceInstance;
 
     private ReservationService(){}
@@ -33,7 +32,7 @@ public class ReservationService {
     public static void addRoom(IRoom room){
         rooms.add(room);
     }
-    public static List<IRoom> getAllRooms(){
+    public static Set<IRoom> getAllRooms(){
         return rooms;
     }
 
@@ -51,10 +50,17 @@ public class ReservationService {
     }
 
     public static List<IRoom> findRooms(Date checkInDate,Date checkOutDate){
-        return reservations.stream()
-                .filter(r -> r.getCheckInDate().equals(checkInDate) && r.getCheckOutDate().equals(checkOutDate))
+        List<IRoom> roomsBasedOnDate = reservations.stream()
+                .filter(r -> r.getCheckInDate().after(checkOutDate) && r.getCheckOutDate().equals(checkInDate))
                 .map(res -> res.getRoom())
                 .collect(Collectors.toList());
+        List<String> allReservedRooms = reservations.stream()
+                .map(res -> res.getRoom().getRoomNumber())
+                .collect(Collectors.toList());
+        List<IRoom> freeRooms = new ArrayList<>(rooms).stream()
+                .filter(room->allReservedRooms.contains(room.getRoomNumber()))
+                .collect(Collectors.toList());
+        return  Stream.concat(roomsBasedOnDate.stream(), freeRooms.stream()).toList();
     }
 
     public static List<Reservation> getCustomersReservation(Customer customer){
