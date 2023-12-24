@@ -5,6 +5,7 @@ import service.ReservationService;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.regex.Pattern;
 
 import static java.lang.System.in;
 
@@ -12,7 +13,7 @@ public class HotelApplication {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(in);
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
-
+        Pattern datePattern = Pattern.compile("^([0-9]{2})-([A-Z]{3})-([0-9]{4})$");
         try {
             System.out.println("Welcome to the Hotel Reservation Application!");
             boolean isAppOpen = true;
@@ -75,20 +76,34 @@ public class HotelApplication {
                             isAppOpen = false;
                             break;
                         case "1":
+                            String checkIn, checkOut = "unknown";
                             System.out.println("Enter checkIn date");
-                            String checkIn = scanner.nextLine();
+                            if (scanner.hasNext(datePattern)) {
+                                checkIn = scanner.nextLine();
+                            }else{
+                                throw new IllegalArgumentException("Enter checkIn date in DD-MMM-YYYY format");
+                            }
                             System.out.println("Enter checkOut date");
-                            String checkOut = scanner.nextLine();
+                            if (scanner.hasNext(datePattern)) {
+                                checkOut = scanner.nextLine();
+                            }else {
+                                System.out.println(checkOut);
+                                throw new IllegalArgumentException("Enter checkOut date in DD-MMM-YYYY format");
+                            }
                             Date checkInDate = formatter.parse(checkIn);
                             Date checkOutDate = formatter.parse(checkOut);
                             Collection<IRoom> rooms = HotelResource.findARoom(checkInDate, checkOutDate);
                             System.out.println(rooms);
-                            System.out.println("Do you want to Reserve a room?Print Y or N");
-                            String ifReserve = scanner.nextLine();
-                            if (ifReserve.equals('Y')) {
-                                System.out.println("Enter your email Address");
-                                String emailId = scanner.nextLine();
-                                HotelResource.bookARoom(emailId, rooms.stream().findFirst().orElse(null), checkInDate, checkOutDate);
+                            if (rooms.size() == 0){
+                                System.out.println("No rooms available");
+                            }else {
+                                System.out.println("Do you want to Reserve a room? Print Y or N");
+                                String ifReserve = scanner.nextLine();
+                                if (ifReserve.equals('Y')) {
+                                    System.out.println("Enter your email Address");
+                                    String emailId = scanner.nextLine();
+                                    HotelResource.bookARoom(emailId, rooms.stream().findFirst().orElse(null), checkInDate, checkOutDate);
+                                }
                             }
                             break;
                         case "3":

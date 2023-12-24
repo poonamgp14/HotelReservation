@@ -31,6 +31,7 @@ public class Customer {
     private String lastName;
     private String email;
     private final String emailRegex = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
+//    dd-MMM-yyyy "^([0-9]{2})-([A-Z]{3})-([0-9]{4})$"
     private final Pattern pattern = Pattern.compile(emailRegex,Pattern.CASE_INSENSITIVE);
 
     public Customer(String firstName, String lastName, String email) {
