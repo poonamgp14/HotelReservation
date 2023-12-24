@@ -42,14 +42,19 @@ public class HotelApplication {
                                 throw new IllegalArgumentException("Invalid room price");
                             }
                             System.out.println("Enter room type: 1 for single bed, 2 for double bed");
-                            if (scanner.hasNextInt() && (scanner.nextLine().equals(1) || scanner.nextLine().equals(2))) {
+                            if (scanner.hasNextInt()){
                                 rmType = scanner.nextInt();
+                                if (rmType == 1 || rmType == 2) {
+                                    AdminResource.addRoom(new Room(String.valueOf(roomNumber), roomPrice, rmType == 1 ? RoomType.SINGLE : RoomType.DOUBLE));
+                                    System.out.println(ReservationService.getARoom(String.valueOf((roomNumber))));
+                                    break;
+                                }else{
+                                    throw new IllegalArgumentException("Please enter 1 or 2");
+                                }
                             }else{
                                 throw new IllegalArgumentException("Invalid room type");
                             }
-                            AdminResource.addRoom(new Room(String.valueOf(roomNumber), roomPrice, rmType == 1 ? RoomType.SINGLE : RoomType.DOUBLE));
-                            System.out.println(ReservationService.getARoom(String.valueOf((roomNumber))));
-                            break;
+
                         case "1":
                             Collection<Customer> customers = AdminResource.getAllCustomers();
                             System.out.println(customers);
@@ -111,7 +116,7 @@ public class HotelApplication {
                 }
             }
         } catch (Exception ex) {
-            System.out.println(ex.getLocalizedMessage());
+            System.out.println(ex.getMessage());
         } finally {
             scanner.close();
         }
