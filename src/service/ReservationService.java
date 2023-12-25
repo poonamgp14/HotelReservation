@@ -51,14 +51,14 @@ public class ReservationService {
 
     public static List<IRoom> findRooms(Date checkInDate,Date checkOutDate){
         List<IRoom> roomsBasedOnDate = reservations.stream()
-                .filter(r -> r.getCheckInDate().after(checkOutDate) && r.getCheckOutDate().equals(checkInDate))
+                .filter(r -> r.getCheckOutDate().equals(checkInDate))
                 .map(res -> res.getRoom())
                 .collect(Collectors.toList());
         List<String> allReservedRooms = reservations.stream()
                 .map(res -> res.getRoom().getRoomNumber())
                 .collect(Collectors.toList());
         List<IRoom> freeRooms = new ArrayList<>(rooms).stream()
-                .filter(room->allReservedRooms.contains(room.getRoomNumber()))
+                .filter(room->!allReservedRooms.contains(room.getRoomNumber()))
                 .collect(Collectors.toList());
         return  Stream.concat(roomsBasedOnDate.stream(), freeRooms.stream()).toList();
     }
