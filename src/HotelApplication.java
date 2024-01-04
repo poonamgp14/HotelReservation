@@ -6,14 +6,16 @@ import service.ReservationService;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import static java.lang.System.in;
 
 public class HotelApplication {
     public static void main(String[] args) {
+        System.out.println("ooooo");
         Scanner scanner = new Scanner(in);
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
-//        Pattern datePattern = Pattern.compile("^([0-9]{2})-([A-Z]{3})-([0-9]{4})$");
+
         try {
             System.out.println("Welcome to the Hotel Reservation Application!");
             boolean isAppOpen = true;
@@ -107,11 +109,16 @@ public class HotelApplication {
                             System.out.println(rooms);
                             if (rooms.size() == 0){
                                 System.out.println("No rooms available");
+                                Collection<Reservation> possibleRes = HotelResource.findPossibleReservations(checkInDate, checkOutDate);
+                                System.out.println(possibleRes);
                             }else {
                                 System.out.println("Do you want to Reserve a room? Enter your email Address");
                                 String emailId = scanner.nextLine();
-                                if (!emailId.isEmpty()) {
-                                    Reservation res = HotelResource.bookARoom(emailId, rooms.stream().findFirst().orElse(null), checkInDate, checkOutDate);
+                                System.out.println("Enter room number you would like to book");
+                                if (!emailId.isEmpty() && scanner.hasNextInt()) {
+                                    int roomNumber = scanner.nextInt();
+                                    IRoom roomToBook = ReservationService.getARoom(String.valueOf((roomNumber)));
+                                    Reservation res = HotelResource.bookARoom(emailId, roomToBook, checkInDate, checkOutDate);
                                     System.out.println("Room is reserved" + res.toString());
                                 }
                             }
@@ -128,9 +135,22 @@ public class HotelApplication {
                             break;
                         case "2":
                             System.out.println("Enter your email Address");
-                            String email = scanner.nextLine();
-                            Collection<Reservation> reservations = HotelResource.getCustomersReservations(email);
-                            System.out.println(reservations);
+                            boolean isValidInput = false;
+//                            String email=null;
+                            while (!isValidInput) {
+                                if(scanner.hasNext()){
+                                    System.out.println("++++++i m in if-----");
+                                    String email = scanner.next();
+                                    System.out.println(email);
+                                    Collection<Reservation> reservations = HotelResource.getCustomersReservations(email);
+                                    System.out.println(reservations);
+                                    isValidInput = true;
+                                }
+                            }
+//                            System.out.println(email);
+//
+//                            Collection<Reservation> reservations = HotelResource.getCustomersReservations(email);
+//                            System.out.println(reservations);
                             break;
                         case "4":
                             displayMainMenu = false;

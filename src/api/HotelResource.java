@@ -40,10 +40,16 @@ public class HotelResource {
 
      public static Collection<Reservation> getCustomersReservations(String email){
         Customer customer = CustomerService.getCustomer(email);
+         System.out.println("------------------hotel resource customer------");
+         System.out.println(customer);
         return ReservationService.getCustomersReservation(customer);
     }
 
      public static Collection<IRoom> findARoom(Date checkIn, Date checkOut){
         return ReservationService.findRooms(checkIn,checkOut);
+     }
+
+     public static Collection<Reservation> findPossibleReservations(Date checkIn, Date checkOut){
+         return ReservationService.findPossibleReservation(checkIn,checkOut);
      }
 }
